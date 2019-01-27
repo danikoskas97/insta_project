@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+  <link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css"  media="all" > 
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <title>Insta/</title>
+</head>
+<body>
+      <nav class="main-navigation">
+        <div class="navbar-header animated fadeInUp">
+            <a class="navbar-brand" href="#">Instagram</a>
+        </div>
+            {% if not request.user.is_authenticated %}
+        <ul class="nav-list">
+            <li class="nav-list-item">
+                <a href="{% url 'insta_app:login' %}" class="nav-link">Se Connecter</a>
+            </li>
+            <li class="nav-list-item">
+                <a href="{% url 'insta_app:signup' %}" class="nav-link">Signup</a>
+            </li>
+            {% else %}
+            <li class="nav-list-item">
+                <a href="{% url 'insta_app:logout_auth' %}" class="nav-link">Logout</a>
+            </li>
+            {% endif %}
+        </ul>
+
+    </nav>
+<div id="content">
+    {% block content %}{% endblock %}
+</div>

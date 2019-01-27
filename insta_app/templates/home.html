@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+	<h1>INSTAGRAM</h1>
+
+
+<div class="container">
+<div class="row pt-3">
+	
+	<div class="col">
+	{% for list_post in posts_with_followers %}
+	{% for post in list_post %}
+ 
+	<!-- <img src="{{ profile.photo.url }}" style="border-radius: 20px"> -->
+    <a class="card-title" style="padding-left: 55px;" href="{% url 'insta_app:profile' post.profile.user.username %}">{{ post.profile.user.username }}</a>
+<div class="card-pt-3"> 
+  <img src="{{ post.photo.url }}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <p class="card-text">{{ post.text }}</p>
+    <a href="{% url 'insta_app:comment_form' post.id %}" class="btn btn-primary">comment</a>
+    <a href="{% url 'insta_app:like' post.id %}" class="btn btn-primary">like</a>
+  </div>
+  	<h3>comments :</h3>
+	{% for comment in post.comment.all %}
+	<p>{{ comment.text }}</p>
+	<hr>
+	{% endfor %}
+  	{% endfor %}
+  	{% endfor %}
+</div>
+
+
+</div>
+
+</div>
+
+	</div>
+	</div>
+
+
+
+
+
+
+
+
+
+{% endblock %}
